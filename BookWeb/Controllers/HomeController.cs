@@ -29,9 +29,5 @@ namespace BookWeb.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public void Error(Exception error)
-        {
-
-        }
     }
 }
