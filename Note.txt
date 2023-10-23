@@ -1,0 +1,34 @@
+ public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+
+_DbContextOptions không phải là một dependency injection (DI) của DbContext. Nó là một đối tượng cung cấp thông tin cấu hình và tùy chọn cho DbContext. 
+Thông qua DbContextOptions, bạn có thể cấu hình cách DbContext sẽ làm việc với cơ sở dữ liệu, chẳng hạn như loại cơ sở dữ liệu, chuỗi kết nối, và các tùy chọn khác. 
+bạn có thể dễ dàng cấu hình và thay đổi tùy chọn của DbContext mà không cần thay đổi mã nguồn của lớp DbContext, giúp mã của bạn linh hoạt hơn và dễ dàng kiểm thử và quản lý.
+
+_DbContext là một công cụ sử dụng để làm việc với cơ sở dữ liệu trong ứng dụng .NET.
+
+_": base(options)" là cách để gọi constructor của lớp cơ sở, tức là constructor của lớp cha DbContext, 
+và truyền tham số options vào constructor của lớp cha. Trong Entity Framework Core, 
+constructor của DbContext cần nhận một tham số kiểu DbContextOptions<TContext> để cung cấp cấu hình cho DbContext. Thông qua dòng này, 
+bạn đang chuyển tùy chọn cấu hình cơ sở dữ liệu cho DbContext từ constructor của ApplicationDbContext xuống constructor của DbContext.
+------------------------------------------------------------------------------------------
+
+_Migration là quá trình thay đổi cấu trúc của cơ sở dữ liệu, thường thông qua việc thêm, 
+sửa đổi hoặc xóa các bảng, cột hoặc ràng buộc. Migrations giúp duy trì sự nhất quán giữa mã nguồn ứng dụng và cơ sở dữ liệu.
+
+------------------------------------------------------------------------------------------
+
+_Dependency Injection (DI) là 1 kỹ thuật lập trình giúp tách 1 class độc lập với các biến phụ thuộc
+_DI cũng là 1 Design Pattern
+
+    public class CategoryController : Controller
+    {
+	//Thay vì private readonly ApplicationDbContext _db = new ApplicationDbContext();
+	//Sử dụng kỹ thuật dưới đây gọi là Constructor injection (1 dạng của DI)
+        private readonly ApplicationDbContext _db; 
+        public CategoryController(ApplicationDbContext db)
+        {
+            _db = db;
+        }
+    }
+
+------------------------------------------------------------------------------------------

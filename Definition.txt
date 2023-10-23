@@ -1,0 +1,13 @@
+_Data annotation: là [Key], [Required],.....
+
+_Entity Framework là hệ thống sử dụng các hệ quản trị cơ sở dữ liệu
+
+_Models Folder: nơi chứa các class là các bảng của cơ sở dữ liệu
+
+_Các class trong folder Migrations: là nơi chứa code tạo csdl
+
+_CRUD là một mô hình gồm bốn chức năng chính là Create, Read, Update, và Delete
+
+_asp-controller, asp-action là helper tag
+
+_DbSet là một lớp trong Entity Framework được sử dụng để đại diện cho một bảng

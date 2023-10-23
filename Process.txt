@@ -1,0 +1,7 @@
+Tools: Packet Manager Console (in Tools/NuGet Packet Manager)
+
+_updata-database: thực hiện cập nhật cho database trong (vd tạo csdl trong SqlServer)
+
+_add-migration [đặt tên](vd:AddCategoryTableToDb): tạo class AddCategoryTableToDb trong Folder Migrations(Folder do máy tự tạo)
+
+_updata-database: để chạy chuyển code trong class AddCategoryTableToDb thành code sql và tạo bảng
