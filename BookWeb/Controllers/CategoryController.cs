@@ -91,7 +91,7 @@ namespace BookWeb.Controllers
         public IActionResult DeletePOST(int? id)
         {
             Category obj = _db.Categories.Find(id);
-            if(obj == null)
+            if (obj == null)
             {
                 return NotFound();
             }
@@ -99,5 +99,13 @@ namespace BookWeb.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        //[HttpPost, ActionName("Delete")]
+        //public IActionResult DeletePOST(Category obj)
+        //{
+        //    _db.Categories.Remove(obj);
+        //    _db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
     }
 }
