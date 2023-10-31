@@ -6,6 +6,8 @@ _Models Folder: nơi chứa các class là các bảng của cơ sở dữ liệ
 
 _Partial View: khái niệm chỉ việc chia View thành từng phần nhỏ
 
+_Partial View: Để code trong Partial View khi cần chỉ cần gọi ra thay vì lần nào cũng viết lại code
+
 _Các class trong folder Migrations: là nơi chứa code tạo csdl
 
 _CRUD là một mô hình gồm bốn chức năng chính là Create, Read, Update, và Delete
