@@ -34,6 +34,7 @@ namespace BookWeb.Controllers
             {
                 _db.Categories.Add(obj);
                 _db.SaveChanges();
+                TempData["success"] = "Category created successfully"; //TempData: create notification //"success" is key name
                 return RedirectToAction("Index");
             }
             return View();
@@ -64,6 +65,7 @@ namespace BookWeb.Controllers
             {
                 _db.Categories.Update(obj);
                 _db.SaveChanges();
+                TempData["success"] = "Category updated successfully";
                 return RedirectToAction("Index");
             }
             return View();
@@ -77,8 +79,6 @@ namespace BookWeb.Controllers
             }
 
             Category categoryFromDb = _db.Categories.Find(id); //Find() just for Primary Key
-            //Category categoryFromDb1 = _db.Categories.FirstOrDefault(u => u.Name == "Hello");
-            //Category categoryFromDb2 = _db.Categories.Where(u => u.Id == id).FirstOrDefault(); 
 
             if (categoryFromDb == null)
             {
@@ -97,6 +97,7 @@ namespace BookWeb.Controllers
             }
             _db.Categories.Remove(obj);
             _db.SaveChanges();
+            TempData["success"] = "Category deleted successfully";
             return RedirectToAction("Index");
         }
 
