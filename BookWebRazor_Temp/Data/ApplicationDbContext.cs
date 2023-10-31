@@ -1,13 +1,14 @@
-﻿using BookWeb.Models;
+﻿using System.Collections.Generic;
+using System.Reflection.Emit;
+using BookWebRazor_Temp.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookWeb.Data
+namespace BookWebRazor_Temp.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            
         }
 
         public DbSet<Category> Categories { get; set; } // Categories is a table name in SqlServer
@@ -23,4 +24,3 @@ namespace BookWeb.Data
         }
     }
 }
-
