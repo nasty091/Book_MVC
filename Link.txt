@@ -3,3 +3,6 @@ https://bootswatch.com/
 
 _Lấy icon 
 https://icons.getbootstrap.com/
+
+_Lấy toastr
+https://codeseven.github.io/toastr/demo.html
