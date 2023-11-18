@@ -32,3 +32,29 @@ _DI cũng là 1 Design Pattern
     }
 
 ------------------------------------------------------------------------------------------
+
+Generic type parameters là một tính năng trong ngôn ngữ lập trình cho phép bạn tạo ra các lớp, 
+phương thức hoặc interface mà có thể làm việc với nhiều kiểu dữ liệu khác nhau mà không cần phải định nghĩa lại code. 
+
+public class ExampleList<T>
+{
+    public void Add(T input) { }
+}
+class TestProgram
+{
+    private class ListItem { }
+    static void Main()
+    {
+        ExampleList<int> list1 = new ExampleList<int>();
+        list1.Add(1);
+
+        ExampleList<string> list2 = new ExampleList<string>();
+        list2.Add("Hello world");
+
+        ExampleList<ListItem> list3 = new ExampleList<ListItem>();
+        list3.Add(new ListItem());
+    }
+}
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
