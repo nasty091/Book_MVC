@@ -15,3 +15,6 @@ _CRUD là một mô hình gồm bốn chức năng chính là Create, Read, Upda
 _asp-controller, asp-action là helper tag
 
 _DbSet là một lớp trong Entity Framework được sử dụng để đại diện cho một bảng
+
+_IEnumerable là 1 interface dùng để chứa nhiều đối tượng như List, nhưng không có
+các phương thức thêm, xóa, cập nhật như List
