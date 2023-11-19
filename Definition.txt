@@ -18,3 +18,8 @@ _DbSet là một lớp trong Entity Framework được sử dụng để đại 
 
 _IEnumerable là 1 interface dùng để chứa nhiều đối tượng như List, nhưng không có
 các phương thức thêm, xóa, cập nhật như List
+
+_Dependency Injection Service Lifetimes
++Transient: New Service - every time requested
++Scoped: New Service - once per request
++Singleton: once per application life time
