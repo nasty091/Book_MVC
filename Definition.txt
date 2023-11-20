@@ -25,3 +25,5 @@ _Dependency Injection Service Lifetimes
 +Singleton: once per application life time
 
 _scaffolding thường được sử dụng để chỉ quá trình tự động tạo mã hoặc template mã nguồn
+
+_CDN là viết tắt của "Content Delivery Network," có thể dịch là "Mạng phân phối nội dung."
