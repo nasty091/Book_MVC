@@ -23,3 +23,5 @@ _Dependency Injection Service Lifetimes
 +Transient: New Service - every time requested
 +Scoped: New Service - once per request
 +Singleton: once per application life time
+
+_scaffolding thường được sử dụng để chỉ quá trình tự động tạo mã hoặc template mã nguồn
