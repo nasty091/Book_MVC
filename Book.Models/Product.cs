@@ -37,7 +37,7 @@ namespace Book.Models
         [Required]
         [Display(Name = "Price for 50+")]
         [Range(1, 1000)]
-        public double Price100 { get; set; }
+        public double Price50 { get; set; }
 
         [Required]
         [Display(Name = "Price for 100+")]

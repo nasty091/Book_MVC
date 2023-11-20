@@ -5,6 +5,10 @@ _Lấy icon
 https://icons.getbootstrap.com/
 
 _Lấy toastr
-https://codeseven.github.io/toastr/demo.html
++Xem demo: https://codeseven.github.io/toastr/demo.html
++Lấy link js và css: https://codeseven.github.io/toastr/
+
+_Lấy code bootstrap có sẵn: 
+
 
 
