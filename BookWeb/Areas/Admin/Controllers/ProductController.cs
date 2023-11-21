@@ -1,6 +1,7 @@
 ﻿using Book.DataAccess.Repository;
 using Book.DataAccess.Repository.IRepository;
 using Book.Models;
+using Book.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
@@ -24,21 +25,26 @@ namespace BookWeb.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            //Projections method
-            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category
+            //ViewBag.CategoryList = CategoryList;
+            //ViewData["CategoryList"] = CategoryList;
+
+            ProductVM productVM = new()
+            {
+                //Projections method
+                CategoryList = _unitOfWork.Category
                 .GetAll().Select(u => new SelectListItem
                 {
                     Text = u.Name,
                     Value = u.Id.ToString(),
-                });
+                }),
+                Product = new Product()
+            };
 
-            //ViewBag.CategoryList = CategoryList;
-            ViewData["CategoryList"] = CategoryList;
-            return View();
+            return View(productVM);
         }
 
         [HttpPost]
-        public IActionResult Create(Product obj)
+        public IActionResult Create(ProductVM productVM)
         {
             //if (obj.Name == obj.DisplayOrder.ToString())
             //{
@@ -46,12 +52,23 @@ namespace BookWeb.Areas.Admin.Controllers
             //}
             if (ModelState.IsValid)
             {
-                _unitOfWork.Product.Add(obj);
+                _unitOfWork.Product.Add(productVM.Product);
                 _unitOfWork.Save();
                 TempData["success"] = "Product created successfully"; //TempData: create notification //"success" is key name
                 return RedirectToAction("Index");
             }
-            return View();
+            else
+            {
+
+                //Projections method
+                productVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString(),
+                });
+                 
+                return View(productVM);
+            }
         }
 
         public IActionResult Edit(int? id)
