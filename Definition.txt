@@ -19,6 +19,11 @@ _DbSet là một lớp trong Entity Framework được sử dụng để đại 
 _IEnumerable là 1 interface dùng để chứa nhiều đối tượng như List, nhưng không có
 các phương thức thêm, xóa, cập nhật như List
 
+_IEnumerable<T> thường phù hợp hơn cho việc làm việc với dữ liệu ở phía máy chủ hoặc dữ liệu đã được lấy về và lưu trữ trong bộ nhớ.
+
+_IQueryable<T> thường có hiệu suất tốt hơn khi làm việc với cơ sở dữ liệu, vì nó cho phép tạo ra các truy vấn SQL phức tạp 
+được thực hiện bởi cơ sở dữ liệu thay vì lấy về toàn bộ dữ liệu và xử lý ở phía máy chủ.
+
 _Dependency Injection Service Lifetimes
 +Transient: New Service - every time requested
 +Scoped: New Service - once per request
@@ -27,3 +32,6 @@ _Dependency Injection Service Lifetimes
 _scaffolding thường được sử dụng để chỉ quá trình tự động tạo mã hoặc template mã nguồn
 
 _CDN là viết tắt của "Content Delivery Network," có thể dịch là "Mạng phân phối nội dung."
+
+
+

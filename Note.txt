@@ -56,5 +56,14 @@ class TestProgram
     }
 }
 ------------------------------------------------------------------------------------------
+Trong lập trình, "projections" thường được sử dụng để chỉ quá trình chọn lọc hoặc ánh xạ (mapping) dữ liệu 
+từ một dạng dữ liệu hoặc cấu trúc sang một dạng khác.
+
+            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category
+                .GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString(),
+                });
 ------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------
