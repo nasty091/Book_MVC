@@ -24,6 +24,7 @@ namespace BookWeb.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
+            //Projections method
             IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category
                 .GetAll().Select(u => new SelectListItem
                 {
@@ -31,7 +32,8 @@ namespace BookWeb.Areas.Admin.Controllers
                     Value = u.Id.ToString(),
                 });
 
-            ViewBag.CategoryList = CategoryList;  
+            //ViewBag.CategoryList = CategoryList;
+            ViewData["CategoryList"] = CategoryList;
             return View();
         }
 

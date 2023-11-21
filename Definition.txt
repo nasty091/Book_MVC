@@ -33,5 +33,15 @@ _scaffolding thường được sử dụng để chỉ quá trình tự động
 
 _CDN là viết tắt của "Content Delivery Network," có thể dịch là "Mạng phân phối nội dung."
 
+_ViewBag,ViewData dùng để đưa dữ liệu từ Controller sang View
+
+_ViewBag:
+Sử dụng khi bạn muốn một cú pháp ngắn gọn và không cần kiểm tra kiểu tại thời điểm biên dịch.
+Thích hợp cho các trường hợp đơn giản.
+
+_ViewData:
+Sử dụng khi bạn cần kiểm tra kiểu tại thời điểm biên dịch.
+Cần giữ giá trị dữ liệu qua nhiều request.
+
 
 
