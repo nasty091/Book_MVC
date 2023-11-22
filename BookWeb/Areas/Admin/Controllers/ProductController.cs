@@ -23,7 +23,7 @@ namespace BookWeb.Areas.Admin.Controllers
             return View(objProductList);
         }
 
-        public IActionResult Create()
+        public IActionResult Upsert(int? id) //Upsert = UpdateInsert
         {
             //ViewBag.CategoryList = CategoryList;
             //ViewData["CategoryList"] = CategoryList;
@@ -39,12 +39,21 @@ namespace BookWeb.Areas.Admin.Controllers
                 }),
                 Product = new Product()
             };
-
-            return View(productVM);
+            if(id == null || id == 0)
+            {
+                //Create
+                return View(productVM);
+            }
+            else
+            {
+                //Update
+                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id);
+                return View(productVM);
+            }
         }
 
         [HttpPost]
-        public IActionResult Create(ProductVM productVM)
+        public IActionResult Upsert(ProductVM productVM, IFormFile? file)
         {
             //if (obj.Name == obj.DisplayOrder.ToString())
             //{
@@ -57,52 +66,20 @@ namespace BookWeb.Areas.Admin.Controllers
                 TempData["success"] = "Product created successfully"; //TempData: create notification //"success" is key name
                 return RedirectToAction("Index");
             }
-            //else
-            //{
-
-            //    //Projections method
-            //    productVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
-            //    {
-            //        Text = u.Name,
-            //        Value = u.Id.ToString(),
-            //    });
-
-            //    return View(productVM);
-            //}
-            return View();
-        }
-
-        public IActionResult Edit(int? id)
-        {
-            if (id == null || id == 0)
+            else
             {
-                return NotFound();
-            }
 
-            Product productFromDb = _unitOfWork.Product.Get(u => u.Id == id); //Find() just for Primary Keys
-            //Category categoryFromDb1 = _db.Products.FirstOrDefault(u => u.Name == "Hello");
-            //Category categoryFromDb2 = _db.Products.Where(u => u.Id == id).FirstOrDefault(); 
+                //Projections method
+                productVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString(),
+                });
 
-            if (productFromDb == null)
-            {
-                return NotFound();
-            }
-            return View(productFromDb);
-        }
-
-        [HttpPost]
-        public IActionResult Edit(Product obj)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.Product.Update(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "Category updated successfully";
-                return RedirectToAction("Index");
+                return View(productVM);
             }
             return View();
         }
-
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
