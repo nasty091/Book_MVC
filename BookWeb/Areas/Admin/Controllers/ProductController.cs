@@ -57,18 +57,19 @@ namespace BookWeb.Areas.Admin.Controllers
                 TempData["success"] = "Product created successfully"; //TempData: create notification //"success" is key name
                 return RedirectToAction("Index");
             }
-            else
-            {
+            //else
+            //{
 
-                //Projections method
-                productVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
-                {
-                    Text = u.Name,
-                    Value = u.Id.ToString(),
-                });
-                 
-                return View(productVM);
-            }
+            //    //Projections method
+            //    productVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+            //    {
+            //        Text = u.Name,
+            //        Value = u.Id.ToString(),
+            //    });
+
+            //    return View(productVM);
+            //}
+            return View();
         }
 
         public IActionResult Edit(int? id)
