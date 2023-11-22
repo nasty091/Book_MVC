@@ -9,6 +9,8 @@ _Lấy toastr
 +Lấy link js và css: https://codeseven.github.io/toastr/
 
 _Lấy code bootstrap có sẵn: 
+https://getbootstrap.com/
 
-
+_Lấy mẫu textarea đẹp (dùng cho Description property)
+https://www.tiny.cloud/my-account/integrate/
 
