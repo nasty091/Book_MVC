@@ -43,5 +43,8 @@ _ViewData:
 Sử dụng khi bạn cần kiểm tra kiểu tại thời điểm biên dịch.
 Cần giữ giá trị dữ liệu qua nhiều request.
 
+_using dùng để tạo phạm vi cho đối tượng, tài nguyên được giải phóng khi không cần thiết,
+tránh rò rì tài nguyên 
+
 
 
