@@ -14,3 +14,6 @@ https://getbootstrap.com/
 _Lấy mẫu textarea đẹp (dùng cho Description property)
 https://www.tiny.cloud/my-account/integrate/
 
+_Lấy Datatbles API dùng để tạo tìm kiếm
+https://datatables.net/
+

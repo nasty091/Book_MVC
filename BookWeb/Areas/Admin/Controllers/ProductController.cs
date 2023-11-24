@@ -153,6 +153,15 @@ namespace BookWeb.Areas.Admin.Controllers
         //    _db.SaveChanges();
         //    return RedirectToAction("Index");
         //}
+
+        #region
+        [HttpGet]
+        public IActionResult GetAll(int id)
+        {
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
+            return Json(new {data =  objProductList});
+        }
+        #endregion
     }
 }
 
