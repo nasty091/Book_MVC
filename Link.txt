@@ -19,3 +19,6 @@ https://datatables.net/
 
 _Định hình code JSON:
 https://jsonformatter.org/
+
+_Tạo alert đẹp:
+https://sweetalert2.github.io/recipe-gallery/
