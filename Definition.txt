@@ -48,3 +48,5 @@ tránh rò rì tài nguyên
 
 _$(document).ready(function(){}): nghĩa là sau khi trang Html được tải xong mới thực hiện function bên trong
 
+_readonly là một từ khóa được sử dụng để chỉ định rằng một biến chỉ có thể được gán giá trị một lần 
+và chỉ có thể được gán giá trị trong hàm tạo hoặc khi biến được khai báo.
