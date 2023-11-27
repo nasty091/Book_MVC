@@ -1,9 +1,10 @@
 ﻿using Book.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Book.DataAccess.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
         {
@@ -16,6 +17,9 @@ namespace Book.DataAccess.Data
         //To seed(create) data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Keys of identity tables are mapped in the OnModelCreating
+            base.OnModelCreating(modelBuilder);
+
             //Category
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Action", DisplayOrder = 1 },
