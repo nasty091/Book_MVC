@@ -1,3 +1,4 @@
+using Book.DataAccess.Repository;
 using Book.DataAccess.Repository.IRepository;
 using Book.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -10,11 +11,20 @@ namespace BookWeb.Areas.Customer.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IEmailSender _emailSender;
 
-        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork, IEmailSender emailSender)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
+            _emailSender = emailSender;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Index(string email, string subject, string message)
+        {
+            await _emailSender.SendEmailAsync(email, subject, message);
+            return View();
         }
 
         public IActionResult Index()
