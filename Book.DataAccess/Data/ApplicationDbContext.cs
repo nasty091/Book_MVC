@@ -15,6 +15,8 @@ namespace Book.DataAccess.Data
         public DbSet<Category> Categories { get; set; } // Categories is a table name in SqlServer
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
         //To seed(create) data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
