@@ -11,21 +11,21 @@ namespace BookWeb.Areas.Customer.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IEmailSender _emailSender;
+        //private readonly IEmailSender _emailSender;
 
         public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork, IEmailSender emailSender)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
-            _emailSender = emailSender;
+            //_emailSender = emailSender;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Index(string email, string subject, string message)
-        {
-            await _emailSender.SendEmailAsync(email, subject, message);
-            return View();
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> Index(string email, string subject, string message)
+        //{
+        //    await _emailSender.SendEmailAsync(email, subject, message);
+        //    return View();
+        //}
 
         public IActionResult Index()
         {

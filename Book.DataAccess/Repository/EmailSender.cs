@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Book.DataAccess.Repository.IRepository;
+using System.Drawing.Text;
 
 namespace Book.DataAccess.Repository
 {
@@ -13,16 +14,20 @@ namespace Book.DataAccess.Repository
     {
         public Task SendEmailAsync(string email, string subject, string message)
         {
-            var client = new SmtpClient("smtp.office365.com", 587)
+            var mail = "phamcaodaian.9a1@gmail.com";
+            var pw = "biu123456789";
+
+            //465,587
+            var client = new SmtpClient("smtp.gmail.com", 456)
             {
                 EnableSsl = true,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("your.email@live.com", "your password")
+                //UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(mail, pw)
             };
 
             return client.SendMailAsync(
-                new MailMessage(from: "your.email@live.com",
-                                to: email,
+                new MailMessage(from: email,
+                                to: mail,
                                 subject,
                                 message
                                 ));
