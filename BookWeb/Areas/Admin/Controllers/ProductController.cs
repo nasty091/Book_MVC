@@ -2,6 +2,8 @@
 using Book.DataAccess.Repository.IRepository;
 using Book.Models;
 using Book.Models.ViewModels;
+using Book.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
@@ -9,6 +11,7 @@ using System.Collections.Generic;
 namespace BookWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)] //Only Admin can access this controller
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
