@@ -17,6 +17,7 @@ namespace Book.DataAccess.Data
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Company> Companies { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
         //To seed(create) data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
