@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace BookWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = SD.Role_Admin)] //Only Admin can access this controller
+    //[Authorize(Roles = SD.Role_Admin)] //Only Admin can access this controller
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -94,14 +94,16 @@ namespace BookWeb.Areas.Admin.Controllers
                 if (productVM.Product.Id == 0)
                 {
                     _unitOfWork.Product.Add(productVM.Product);
+                    TempData["success"] = "Product created successfully"; //TempData: create notification //"success" is key name
                 }
                 else
                 {
                     _unitOfWork.Product.Update(productVM.Product);
+                    TempData["success"] = "Product updated successfully";
                 }
 
                 _unitOfWork.Save();
-                TempData["success"] = "Product created successfully"; //TempData: create notification //"success" is key name
+                //TempData["success"] = "Product created successfully"; //TempData: create notification //"success" is key name
                 return RedirectToAction("Index");
             }
             else
