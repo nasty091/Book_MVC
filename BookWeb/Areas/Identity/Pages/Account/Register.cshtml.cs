@@ -139,7 +139,7 @@ namespace BookWeb.Areas.Identity.Pages.Account
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Employee)).GetAwaiter().GetResult();
             }
 
-            //Create Role list for dropdown
+            //Create Role list and Company list for dropdown
             Input = new()
             {
                 RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
@@ -175,6 +175,7 @@ namespace BookWeb.Areas.Identity.Pages.Account
                 user.PostalCode = Input.PostalCode;
                 user.PhoneNumber = Input.PhoneNumber;
 
+                //Add company
                 if(Input.Role == SD.Role_Company)
                 {
                     user.CompanyId = Input.CompanyId;

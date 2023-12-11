@@ -14,6 +14,7 @@ namespace Book.DataAccess.Repository.IRepository
         ICompanyRepository Company { get; }
 
         IShoppingCartRepository ShoppingCart { get; }
+        IApplicationUserRepository ApplicationUser { get; }
         public void Save();
     }
 }
