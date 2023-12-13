@@ -68,6 +68,7 @@ namespace BookWeb.Areas.Customer.Controllers
                 _unitOfWork.ShoppingCart.Add(shoppingCart);
             }
 
+            TempData["success"] = "Cart updated successfully";
             _unitOfWork.Save();
 
             return RedirectToAction(nameof(Index));
