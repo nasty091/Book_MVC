@@ -23,7 +23,7 @@ namespace Book.Models
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
 
-
-
+        [NotMapped] //Don't add this property to Database
+        public double Price { get; set; } // Price per 1 product in ShoppingCart
     }
 }
