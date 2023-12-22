@@ -50,3 +50,6 @@ _$(document).ready(function(){}): nghĩa là sau khi trang Html được tải x
 
 _readonly là một từ khóa được sử dụng để chỉ định rằng một biến chỉ có thể được gán giá trị một lần 
 và chỉ có thể được gán giá trị trong hàm tạo hoặc khi biến được khai báo.
+
+_Stripe là nền tảng xử lý thanh toán cho phép các doanh nghiệp chấp nhận thanh toán trực tuyến và trong
+các ứng dụng dành cho thiết bị di động
