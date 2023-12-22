@@ -76,6 +76,7 @@ namespace BookWeb.Areas.Customer.Controllers
         [ActionName("Summary")]
         public IActionResult SummaryPOST() // Use [BindProperty] for ShoppingCartVM instead of using ShoppingCartVM shoppingCartVM for parameter
         {
+            //Get User Id
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
@@ -84,7 +85,7 @@ namespace BookWeb.Areas.Customer.Controllers
             ShoppingCartVM.OrderHeader.OrderDate = System.DateTime.Now;
             ShoppingCartVM.OrderHeader.ApplicationUserId = userId;
 
-            ShoppingCartVM.OrderHeader.ApplicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
+            ApplicationUser applicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
 
             //Caculate Order Total
             foreach (var cart in ShoppingCartVM.ShoppingCartList)
@@ -93,7 +94,7 @@ namespace BookWeb.Areas.Customer.Controllers
                 ShoppingCartVM.OrderHeader.OrderTotal += (cart.Price * cart.Count);
             }
 
-            if(ShoppingCartVM.OrderHeader.ApplicationUser.CompanyId.GetValueOrDefault() == 0) // Use GetValueOrDefaul due to CompanyId can be NULL, if CompanyId is null the vaule will be 0
+            if(applicationUser.CompanyId.GetValueOrDefault() == 0) // Use GetValueOrDefaul due to CompanyId can be NULL, if CompanyId is null the vaule will be 0
             {
                 // it is a regular customer account and we need to capture payment
                 ShoppingCartVM.OrderHeader.PaymentStatus = SD.PaymentStatusPending;
@@ -122,7 +123,18 @@ namespace BookWeb.Areas.Customer.Controllers
                 _unitOfWork.Save();
             }
 
-            return View(ShoppingCartVM);
+            if (applicationUser.CompanyId.GetValueOrDefault() == 0) // Use GetValueOrDefaul due to CompanyId can be NULL, if CompanyId is null the vaule will be 0
+            {
+                // it is a regular customer account and we need to capture payment
+                // Stripe logic
+            }
+
+            return RedirectToAction(nameof(OrderConfirmation), new { id = ShoppingCartVM.OrderHeader.Id});
+        }
+
+        public IActionResult OrderConfirmation(int id)
+        {
+            return View(id);
         }
 
         public IActionResult Plus(int cartId)

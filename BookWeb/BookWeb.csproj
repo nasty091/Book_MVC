@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Areas\Customer\Views\Cart\OrderConfirmation.cshtml" />
     <Content Remove="wwwroot\js\product.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Customer\Views\Cart\OrderConfirmation.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\js\product.js" />
   </ItemGroup>
 
@@ -18,6 +20,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.0-preview.1.23112.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0-preview.1.23112.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.0-preview.1.23112.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.0-preview.1.23112.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0-preview.1.23112.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0-preview.1.23112.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0-preview.1.23112.2" />
@@ -37,7 +40,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Customer\Views\Cart\OrderConfirmation.cshtml" />
     <None Include="wwwroot\js\product.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Customer\Views\Cart\OrderConfirmation.cshtml" />
   </ItemGroup>
 
 </Project>
