@@ -6,6 +6,7 @@ using Book.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Stripe.Checkout;
 using System.Security.Claims;
 
 namespace BookWeb.Areas.Customer.Controllers
@@ -17,7 +18,7 @@ namespace BookWeb.Areas.Customer.Controllers
         private readonly IUnitOfWork _unitOfWork;
         [BindProperty]
         public ShoppingCartVM ShoppingCartVM { get; set; }
-        
+
         public CartController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -94,7 +95,7 @@ namespace BookWeb.Areas.Customer.Controllers
                 ShoppingCartVM.OrderHeader.OrderTotal += (cart.Price * cart.Count);
             }
 
-            if(applicationUser.CompanyId.GetValueOrDefault() == 0) // Use GetValueOrDefaul due to CompanyId can be NULL, if CompanyId is null the vaule will be 0
+            if (applicationUser.CompanyId.GetValueOrDefault() == 0) // Use GetValueOrDefaul due to CompanyId can be NULL, if CompanyId is null the vaule will be 0
             {
                 // it is a regular customer account and we need to capture payment
                 ShoppingCartVM.OrderHeader.PaymentStatus = SD.PaymentStatusPending;
@@ -110,7 +111,7 @@ namespace BookWeb.Areas.Customer.Controllers
             _unitOfWork.OrderHeader.Add(ShoppingCartVM.OrderHeader);
             _unitOfWork.Save();
 
-            foreach(var cart in ShoppingCartVM.ShoppingCartList)
+            foreach (var cart in ShoppingCartVM.ShoppingCartList)
             {
                 OrderDetail orderDetail = new()
                 {
@@ -127,9 +128,42 @@ namespace BookWeb.Areas.Customer.Controllers
             {
                 // it is a regular customer account and we need to capture payment
                 // Stripe logic
+                var domain = "https://localhost:7124/";
+                var options = new Stripe.Checkout.SessionCreateOptions
+                {
+                    SuccessUrl = domain + $"customer/cart/OrderConfirmation?id={ShoppingCartVM.OrderHeader.Id}",
+                    CancelUrl = domain + "customer/cart/index",
+                    LineItems = new List<Stripe.Checkout.SessionLineItemOptions>(),
+                    Mode = "payment",
+                };
+
+                foreach(var item in ShoppingCartVM.ShoppingCartList)
+                {
+                    var sessionLineItem = new Stripe.Checkout.SessionLineItemOptions
+                    {
+                        PriceData = new Stripe.Checkout.SessionLineItemPriceDataOptions()
+                        {
+                            UnitAmount = (long)(item.Price * 100), // $20.50 => 2050
+                            Currency = "usd",
+                            ProductData = new Stripe.Checkout.SessionLineItemPriceDataProductDataOptions()
+                            {
+                                Name = item.Product.Title
+                            }
+                        },
+                        Quantity = item.Count
+                    };
+                    options.LineItems.Add(sessionLineItem);
+                }
+
+                var service = new Stripe.Checkout.SessionService();
+                Session session = service.Create(options);
+                _unitOfWork.OrderHeader.UpdateStripePaymentID(ShoppingCartVM.OrderHeader.Id, session.Id, session.PaymentIntentId);
+                _unitOfWork.Save();
+                Response.Headers.Add("Location", session.Url);
+                return new StatusCodeResult(303);
             }
 
-            return RedirectToAction(nameof(OrderConfirmation), new { id = ShoppingCartVM.OrderHeader.Id});
+            return RedirectToAction(nameof(OrderConfirmation), new { id = ShoppingCartVM.OrderHeader.Id });
         }
 
         public IActionResult OrderConfirmation(int id)
@@ -170,7 +204,7 @@ namespace BookWeb.Areas.Customer.Controllers
         {
             var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId);
 
-            _unitOfWork.ShoppingCart.Remove(cartFromDb);          
+            _unitOfWork.ShoppingCart.Remove(cartFromDb);
             _unitOfWork.Save();
 
             return RedirectToAction(nameof(Index));
@@ -178,13 +212,13 @@ namespace BookWeb.Areas.Customer.Controllers
 
         private double GetPriceBasedOnQuantity(ShoppingCart shoppingCart)
         {
-            if(shoppingCart.Count <= 50)
+            if (shoppingCart.Count <= 50)
             {
                 return shoppingCart.Product.Price;
             }
             else
             {
-                if(shoppingCart.Count <= 100)
+                if (shoppingCart.Count <= 100)
                 {
                     return shoppingCart.Product.Price50;
                 }
