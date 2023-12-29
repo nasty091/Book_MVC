@@ -66,4 +66,20 @@ từ một dạng dữ liệu hoặc cấu trúc sang một dạng khác.
                     Value = u.Id.ToString(),
                 });
 ------------------------------------------------------------------------------------------
+<input value="@Model.OrderHeader.ShippingDate.ToShortDateString()" readonly type="text" class="form-control" />
+
+_Trong đoạn mã này, bạn đang sử dụng thuộc tính value để thiết lập giá trị của trường dữ liệu. 
+Giá trị này sẽ được render ngay khi trang được tạo và giữ nguyên giá trị đó khi truy cập trang. 
+Nó không liên kết trực tiếp với dữ liệu của mô hình, điều này có nghĩa là nếu giá trị của OrderHeader.ShippingDate 
+thay đổi sau khi trang được tạo, thì giá trị trong trường dữ liệu sẽ không được cập nhật tương ứng.
+
+<input asp-for="@Model.OrderHeader.ShippingDate" readonly type="text" class="form-control" />
+
+_Trong trường hợp này, bạn đang sử dụng asp-for để liên kết trực tiếp với mô hình. Nó sẽ tạo một liên kết giữa 
+trường dữ liệu và thuộc tính trong mô hình. Nếu giá trị của OrderHeader.ShippingDate thay đổi sau khi trang được tạo 
+và nếu mô hình được truyền lại vào server (khi gửi biểu mẫu), thì giá trị của trường dữ liệu sẽ được tự động cập nhật 
+dựa trên giá trị mới của thuộc tính mô hình.
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------

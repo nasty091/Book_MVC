@@ -53,3 +53,5 @@ và chỉ có thể được gán giá trị trong hàm tạo hoặc khi biến 
 
 _Stripe là nền tảng xử lý thanh toán cho phép các doanh nghiệp chấp nhận thanh toán trực tuyến và trong
 các ứng dụng dành cho thiết bị di động
+
+
