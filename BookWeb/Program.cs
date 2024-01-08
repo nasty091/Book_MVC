@@ -33,6 +33,14 @@ builder.Services.ConfigureApplicationCookie(option =>
     option.AccessDeniedPath = $"/Identity/Account/AccessDenied";
 });
 
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(100); //Sets the session's idle timeout to 100 minutes
+    options.Cookie.HttpOnly = true; // it's only accessible to the server and not to client-side scripts like JavaScript, Enhances security by preventing potential cross-site scripting (XSS) attacks
+    options.Cookie.IsEssential = true; //Indicates to browsers that the cookie should be sent even with strict privacy settings
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -51,6 +59,7 @@ StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey"
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseSession();
 app.MapRazorPages();
 
 app.MapControllerRoute(

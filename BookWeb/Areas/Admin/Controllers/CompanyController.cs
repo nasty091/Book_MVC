@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace BookWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = SD.Role_Admin)] //Only Admin can access this controller
+    [Authorize(Roles = SD.Role_Admin)] //Only Admin can access this controller
     public class CompanyController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
