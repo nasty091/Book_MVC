@@ -33,3 +33,6 @@ _Tạo đăng nhập facebook
 https://developers.facebook.com/apps/2363703293839346/fb-login/settings/
 Lấy Id và secret key
 https://developers.facebook.com/apps/2363703293839346/settings/basic/
+
+_Link Azure:
+https://portal.azure.com/
