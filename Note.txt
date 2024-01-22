@@ -80,6 +80,22 @@ trường dữ liệu và thuộc tính trong mô hình. Nếu giá trị của 
 và nếu mô hình được truyền lại vào server (khi gửi biểu mẫu), thì giá trị của trường dữ liệu sẽ được tự động cập nhật 
 dựa trên giá trị mới của thuộc tính mô hình.
 ------------------------------------------------------------------------------------------
+public IActionResult LockUnlock([FromBody]string id)
+
+_Trong ASP.NET Core, [FromBody] là một attribute được sử dụng để chỉ định rằng giá trị của tham số trong 
+một action method của controller sẽ được lấy từ phần body của HTTP request thay vì từ các phần khác như query string, 
+route data, hay header.
+
+Ví dụ, nếu bạn gửi một request như sau:
+
+http
+Copy code
+POST /ControllerName/LockUnlock
+Content-Type: application/json
+
+"123"
+
+Thì giá trị "123" sẽ được chuyển vào tham số id của action method thông qua việc sử dụng [FromBody].
 ------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------
