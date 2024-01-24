@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Book.DataAccess.Repository.IRepository
 {
-    public interface IProductImageRepository : IRepository<ProductImage>
+    public interface IShoppingCartRepository : IRepository<ShoppingCart>
     {
-        void Update(ProductImage obj);
+        void Update(ShoppingCart obj);
     }
 }
