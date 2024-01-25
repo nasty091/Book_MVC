@@ -172,12 +172,19 @@ namespace BookWeb.Areas.Admin.Controllers
                 return Json(new { success = false, message = "Error while deleting" });
             }
 
-            //var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, productToBeDeleted.ImageUrl.TrimStart('\\'));
+            string productPath = @"images\products\product-" + id;
+            string finalPath = Path.Combine(_webHostEnvironment.WebRootPath, productPath);
 
-            //if (System.IO.File.Exists(oldImagePath))
-            //{
-            //    System.IO.File.Delete(oldImagePath);
-            //}
+            if(Directory.Exists(finalPath))
+            {
+                string[] filtPaths = Directory.GetFiles(finalPath);
+                foreach(string filtPath in filtPaths) //Delete all file in path
+                {
+                    System.IO.File.Delete(filtPath);
+                }
+
+                Directory.Delete(finalPath); //Delete path/folder 
+            }
 
             _unitOfWork.Product.Remove(productToBeDeleted);
             _unitOfWork.Save();
