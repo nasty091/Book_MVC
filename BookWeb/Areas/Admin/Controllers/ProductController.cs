@@ -132,6 +132,29 @@ namespace BookWeb.Areas.Admin.Controllers
             }
         }
 
+        public IActionResult DeleteImage(int imageId)
+        {
+            var imageTobeDeleted = _unitOfWork.ProductImage.Get(u => u.Id == imageId);
+            int productId = imageTobeDeleted.ProductId;
+            if (imageTobeDeleted != null)
+            {
+                if (!string.IsNullOrEmpty(imageTobeDeleted.ImageUrl))
+                {
+                    var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, imageTobeDeleted.ImageUrl.TrimStart('\\'));
+                    if(System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
+                _unitOfWork.ProductImage.Remove(imageTobeDeleted);
+                _unitOfWork.Save();
+
+                TempData["success"] = "Deleted successfully";
+            }
+
+            return RedirectToAction("Upsert", new {id = productId});
+        }
+
         #region API CALLS
         [HttpGet]
         public IActionResult GetAll()
