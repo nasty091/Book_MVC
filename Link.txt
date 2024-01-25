@@ -36,3 +36,6 @@ https://developers.facebook.com/apps/2363703293839346/settings/basic/
 
 _Link Azure:
 https://portal.azure.com/
+
+_Tạo băng chuyền cho ảnh (with indicators)
+https://getbootstrap.com/docs/5.0/components/carousel/
